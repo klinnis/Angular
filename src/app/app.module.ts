@@ -17,6 +17,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import {RecipeService} from './recipes/recipe.service';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+import {nameValidators} from "./recipes/recipe-edit/name.validators";
+
 
 
 @NgModule({
@@ -33,15 +36,17 @@ import { SignupComponent } from './auth/signup/signup.component';
     RecipeStartComponent,
     RecipeEditComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+   
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [ShoppingListService, RecipeService,nameValidators],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

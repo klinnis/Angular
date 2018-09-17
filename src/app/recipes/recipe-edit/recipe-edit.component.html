@@ -23,13 +23,21 @@
                   id="name"
                   formControlName="name"
                   class="form-control">
+           <div *ngIf="name.pending">Checking for name...</div>
+            <div *ngIf="name.touched && name.invalid" class="small alert alert-danger ">
+              <div *ngIf="name.errors.required">Name is required</div>
+              <div *ngIf="name.errors.minlength">Name must be up to {{name.errors.minlength.requiredLength}} characters</div>
+              <div *ngIf="name.errors.cannotContainSpace">Space not perimitted</div>
+              <div *ngIf="name.errors.shouldBeUnique">Name exists</div>
+
+            </div>
          </div>
        </div>
      </div>
      <div class="row">
        <div class="col-xs-12">
          <div class="form-group">
-           <label for="imagePath">Image URL</label>
+           <label for="imagePath">Image</label>
            <input type="text"
                   id="imagePath"
                   formControlName="imagePath"
@@ -48,7 +56,7 @@
          <div class="form-group">
            <label for="description">Description</label>
            <textarea type="text"
-                  id="description"
+                     id="description"
                      formControlName="description"
                      class="form-control"
                      rows="6" ></textarea>
@@ -57,21 +65,25 @@
      </div>
      <div class="row">
        <div class="col-xs-12" formArrayName="ingredients">
-         <div class="row" *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
+         <div class="row"
+              *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
               [formGroupName]="i"
-         style="margin-top: 10px">
+              style="margin-top: 10px;">
            <div class="col-xs-8">
-             <input type="text"
-                    class="form-control"
-                    formControlName="name"
-             >
+             <input
+                     type="text"
+                     class="form-control"
+                     formControlName="name">
            </div>
            <div class="col-xs-2">
-             <input type="number"
-                    class="form-control"
-                    formControlName="amount"
-             >
+             <input
+                     type="number"
+                     class="form-control"
+                     formControlName="amount">
            </div>
+
+
+
            <div class="col-xs-2">
              <div    type="button"
                      (click)="onDeleteIngredient(i)"
